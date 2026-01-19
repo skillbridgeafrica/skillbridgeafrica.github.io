@@ -107,6 +107,22 @@
         gap: 10px;
       }
     }
+
+    /* NEW FORM STYLES FROM THE NEW TEMPLATE */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
   </style>
 </head>
 
@@ -135,12 +151,37 @@
   </p>
 
   <div class="contact-box">
-    <form>
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email Address" required>
-      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
+
+    <!-- REPLACED CONTACT FORM START -->
+    <form action="https://formspree.io/f/mojagaob" method="POST" class="contact-form">
+
+      <label>
+        <strong>Your Name</strong>
+        <input type="text" name="name" required>
+      </label>
+
+      <label>
+        <strong>Your Email</strong>
+        <input type="email" name="email" required>
+      </label>
+
+      <label>
+        <strong>Subject</strong>
+        <input type="text" name="subject" required>
+      </label>
+
+      <label>
+        <strong>Your Message</strong>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+
+      <button type="submit" style="align-self:flex-start;">
+        Send Message
+      </button>
+
     </form>
+    <!-- REPLACED CONTACT FORM END -->
+
     <p style="margin-top:15px;">
       📧 Email: <strong>ndongson2001@yahoo.com</strong><br>
       🌍 Serving learners across Africa
