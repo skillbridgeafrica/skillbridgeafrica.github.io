@@ -15,6 +15,7 @@
       line-height: 1.6;
     }
 
+    /* NAVBAR */
     header {
       background: #1E4DD8;
       padding: 20px 40px;
@@ -44,20 +45,90 @@
       text-decoration: underline;
     }
 
-    section {
+    /* HERO */
+    .hero {
+      background: #f4f7ff;
       padding: 60px 40px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #1E4DD8;
+    }
+
+    .hero p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* SEARCH BAR */
+    .search {
+      max-width: 800px;
+      margin: 30px auto 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .search button {
+      padding: 12px 18px;
+      border: none;
+      background: #1E4DD8;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .search button:hover {
+      background: #163bb5;
+    }
+
+    /* CONTENT */
+    section {
+      padding: 40px 40px;
       max-width: 1200px;
       margin: auto;
     }
 
-    h1, h2 {
+    h2 {
       color: #1E4DD8;
+      margin-bottom: 20px;
     }
 
-    .category {
-      margin-top: 50px;
+    .category-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
     }
 
+    .category-row button {
+      border: 1px solid #1E4DD8;
+      background: #fff;
+      color: #1E4DD8;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .category-row button.active {
+      background: #1E4DD8;
+      color: #fff;
+    }
+
+    /* GRID */
     .course-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -67,21 +138,30 @@
 
     .course-card {
       background: #f4f7ff;
-      padding: 25px;
-      border-radius: 10px;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
     .course-card h3 {
       margin-top: 0;
+      margin-bottom: 10px;
     }
 
     .course-card p {
       font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .course-meta {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #555;
     }
 
     .course-card a {
       display: inline-block;
-      margin-top: 10px;
+      margin-top: 14px;
       background: #1E4DD8;
       color: #fff;
       padding: 10px 18px;
@@ -95,11 +175,33 @@
       background: #163bb5;
     }
 
+    /* CTA */
+    .cta {
+      background: #111;
+      color: #fff;
+      padding: 50px;
+      text-align: center;
+      margin-top: 60px;
+      border-radius: 12px;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-top: 15px;
+      background: #4DA6FF;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* DISCLAIMER */
     .disclaimer {
       background: #fff7e6;
       border-left: 5px solid #f4b400;
       padding: 20px;
-      margin-top: 60px;
+      margin-top: 40px;
       border-radius: 6px;
       font-size: 0.95rem;
     }
@@ -124,6 +226,38 @@
       }
     }
   </style>
+
+  <script>
+    // Filter categories
+    function filterCategory(cat) {
+      const cards = document.querySelectorAll('.course-card');
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (cat === 'all' || category === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.querySelectorAll('.category-row button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(cat).classList.add('active');
+    }
+
+    // Search courses
+    function searchCourses() {
+      const term = document.getElementById('searchTerm').value.toLowerCase();
+      const cards = document.querySelectorAll('.course-card');
+      cards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        const desc = card.querySelector('p').innerText.toLowerCase();
+        const match = title.includes(term) || desc.includes(term);
+        card.style.display = match ? 'block' : 'none';
+      });
+    }
+  </script>
 </head>
 
 <body>
@@ -142,83 +276,99 @@
   </nav>
 </header>
 
-<section>
+<section class="hero">
   <h1>Recommended Courses & Certifications</h1>
   <p>
     Browse curated online courses from trusted global platforms to build
     job-ready and future-proof digital skills.
   </p>
 
-  <!-- Digital Skills -->
-  <div class="category">
-    <h2>Digital & Tech Skills</h2>
-    <div class="course-grid">
-      <div class="course-card">
-        <h3>Google IT Support</h3>
-        <p>Entry-level IT skills with a professional certificate.</p>
-        <a href="#">View on Coursera</a>
-      </div>
+  <div class="search">
+    <input id="searchTerm" type="text" placeholder="Search courses by name or skill..." />
+    <button onclick="searchCourses()">Search</button>
+  </div>
+</section>
 
-      <div class="course-card">
-        <h3>Web Development Bootcamp</h3>
-        <p>Learn HTML, CSS, JavaScript, and modern web development.</p>
-        <a href="#">View on Udemy</a>
-      </div>
+<section>
+  <h2>Explore by Category</h2>
 
-      <div class="course-card">
-        <h3>Data Analysis with Python</h3>
-        <p>Analyze data and build insights using Python tools.</p>
-        <a href="#">View on edX</a>
-      </div>
+  <div class="category-row">
+    <button id="all" class="active" onclick="filterCategory('all')">All</button>
+    <button id="tech" onclick="filterCategory('tech')">Digital & Tech</button>
+    <button id="business" onclick="filterCategory('business')">Business</button>
+    <button id="creative" onclick="filterCategory('creative')">Creative</button>
+  </div>
+
+  <div class="course-grid">
+    <!-- Digital & Tech -->
+    <div class="course-card" data-category="tech">
+      <h3>Google IT Support</h3>
+      <p>Entry-level IT skills with a professional certificate.</p>
+      <div class="course-meta">Platform: Coursera | Level: Beginner</div>
+      <a href="#" target="_blank">View on Coursera</a>
+    </div>
+
+    <div class="course-card" data-category="tech">
+      <h3>Web Development Bootcamp</h3>
+      <p>Learn HTML, CSS, JavaScript, and modern web development.</p>
+      <div class="course-meta">Platform: Udemy | Level: Beginner → Intermediate</div>
+      <a href="#" target="_blank">View on Udemy</a>
+    </div>
+
+    <div class="course-card" data-category="tech">
+      <h3>Data Analysis with Python</h3>
+      <p>Analyze data and build insights using Python tools.</p>
+      <div class="course-meta">Platform: edX | Level: Beginner → Intermediate</div>
+      <a href="#" target="_blank">View on edX</a>
+    </div>
+
+    <!-- Business -->
+    <div class="course-card" data-category="business">
+      <h3>Digital Marketing Fundamentals</h3>
+      <p>SEO, social media, and online advertising essentials.</p>
+      <div class="course-meta">Platform: Coursera | Level: Beginner</div>
+      <a href="#" target="_blank">View on Coursera</a>
+    </div>
+
+    <div class="course-card" data-category="business">
+      <h3>Entrepreneurship in Emerging Economies</h3>
+      <p>Build and scale businesses in African markets.</p>
+      <div class="course-meta">Platform: edX | Level: Beginner → Intermediate</div>
+      <a href="#" target="_blank">View on edX</a>
+    </div>
+
+    <div class="course-card" data-category="business">
+      <h3>Freelancing & Remote Work</h3>
+      <p>Learn how to get remote jobs and international clients.</p>
+      <div class="course-meta">Platform: Udemy | Level: Beginner</div>
+      <a href="#" target="_blank">View on Udemy</a>
+    </div>
+
+    <!-- Creative -->
+    <div class="course-card" data-category="creative">
+      <h3>Graphic Design Masterclass</h3>
+      <p>Design logos, flyers, and social media graphics.</p>
+      <div class="course-meta">Platform: Skillshare | Level: Beginner → Intermediate</div>
+      <a href="#" target="_blank">View on Skillshare</a>
+    </div>
+
+    <div class="course-card" data-category="creative">
+      <h3>UI/UX Design Fundamentals</h3>
+      <p>Design user-friendly websites and mobile apps.</p>
+      <div class="course-meta">Platform: Coursera | Level: Beginner</div>
+      <a href="#" target="_blank">View on Coursera</a>
     </div>
   </div>
 
-  <!-- Business -->
-  <div class="category">
-    <h2>Business & Entrepreneurship</h2>
-    <div class="course-grid">
-      <div class="course-card">
-        <h3>Digital Marketing Fundamentals</h3>
-        <p>SEO, social media, and online advertising essentials.</p>
-        <a href="#">View on Coursera</a>
-      </div>
-
-      <div class="course-card">
-        <h3>Entrepreneurship in Emerging Economies</h3>
-        <p>Build and scale businesses in African markets.</p>
-        <a href="#">View on edX</a>
-      </div>
-
-      <div class="course-card">
-        <h3>Freelancing & Remote Work</h3>
-        <p>Learn how to get remote jobs and international clients.</p>
-        <a href="#">View on Udemy</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Creative -->
-  <div class="category">
-    <h2>Creative & Design</h2>
-    <div class="course-grid">
-      <div class="course-card">
-        <h3>Graphic Design Masterclass</h3>
-        <p>Design logos, flyers, and social media graphics.</p>
-        <a href="#">View on Skillshare</a>
-      </div>
-
-      <div class="course-card">
-        <h3>UI/UX Design Fundamentals</h3>
-        <p>Design user-friendly websites and mobile apps.</p>
-        <a href="#">View on Coursera</a>
-      </div>
-    </div>
+  <div class="cta">
+    <h2>Need help choosing the right course?</h2>
+    <p>Send us a message and we’ll guide you based on your goals and skills.</p>
+    <a href="contact.html">Contact Us</a>
   </div>
 
   <div class="disclaimer">
     <strong>Affiliate Disclosure:</strong>
-    Some course links on this page are affiliate links. SkillBridge Africa may earn a
-    commission if you enroll through these links at no extra cost to you.
+    Some course links on this page are affiliate links. SkillBridge Africa may earn a commission if you enroll through these links at no extra cost to you.
   </div>
 </section>
 
