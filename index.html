@@ -22,7 +22,7 @@
     /* NAVBAR */
     header {
       background: #1E4DD8;
-      padding: 20px 40px;
+      padding: 25px 40px;
     }
 
     nav {
@@ -32,9 +32,9 @@
       flex-wrap: wrap;
     }
 
-    /* LOGO SIZE DOUBLED */
+    /* LOGO — DOUBLED AGAIN */
     nav .logo img {
-      height: 90px; /* doubled from 45px */
+      height: 180px; /* doubled from 90px */
       width: auto;
       display: block;
     }
@@ -127,14 +127,15 @@
       margin: 8px 0;
     }
 
+    /* MOBILE */
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
       }
 
       nav .logo img {
-        height: 70px; /* slightly smaller on mobile */
+        height: 120px; /* scaled down for mobile */
       }
     }
   </style>
