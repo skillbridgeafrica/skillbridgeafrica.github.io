@@ -32,10 +32,11 @@
       flex-wrap: wrap;
     }
 
-    nav .logo {
-      color: #fff;
-      font-size: 1.4rem;
-      font-weight: bold;
+    /* LOGO SIZE DOUBLED */
+    nav .logo img {
+      height: 90px; /* doubled from 45px */
+      width: auto;
+      display: block;
     }
 
     nav a {
@@ -129,7 +130,11 @@
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
+      }
+
+      nav .logo img {
+        height: 70px; /* slightly smaller on mobile */
       }
     }
   </style>
@@ -140,8 +145,8 @@
 <header>
   <nav>
     <div class="logo">
-      <a href="./index.html">
-        <img src="image/logos.png" alt="SkillBridge Africa Logo" height="45">
+      <a href="index.html">
+        <img src="image/logos.png" alt="SkillBridge Africa Logo">
       </a>
     </div>
     <div>
@@ -162,7 +167,6 @@
     certificates, and career opportunities from trusted global learning platforms.
   </p>
 
-  <!-- Correct URLs -->
   <a href="courses.html" class="btn">Explore Courses</a>
   <a href="opportunities.html" class="btn secondary">View Opportunities</a>
 </section>
